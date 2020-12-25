@@ -1,0 +1,50 @@
+﻿@using GDipSA51_Team5.Models
+
+@{
+    List<Purchase> pastPurchases = (List<Purchase>)ViewData["pastPurchases"];
+    IEnumerable<int> listingIds = pastPurchases.Select(x => x.ListingId).Distinct();
+}
+
+<table id="mainframe">
+    @foreach (int listingId in listingIds)
+    {
+
+        List<Purchase> listing = pastPurchases.FindAll(x => x.ListingId == listingId).ToList();
+
+        <tr>
+            <td class="listing" style="padding-bottom: 1%;">
+                <img src=@listing[0].Product.Url class="image" />
+                <div id="pdt-name">@listing[0].Product.Name</div>
+                <div id="pdt-descr">@listing[0].Product.Description</div>
+                <input type="button" name="button" class="button" value="Download" />
+            </td>
+
+            <td class="td-filler">
+                <table>
+                    <tr>
+                        <td>Purchased On:</td>
+                        <td>listing[0].PurchaseDate.ToLongDateString()</td>
+                    </tr>
+                    <tr>
+                        <td>Quantity:</td>
+                        <td>listing.Count()</td>
+                    </tr>
+                    <tr>
+                        <td>Activation Code:</td>
+                        <td>
+                            <form>
+                                <select id="select">
+                                    @foreach (Purchase item in listing)
+                                    {
+                                        <option value="@item.ActivationCode">@item.ActivationCode</option>
+                                    }
+                                </select>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td class="td-filler"></td>
+        </tr>
+    }
+</table>

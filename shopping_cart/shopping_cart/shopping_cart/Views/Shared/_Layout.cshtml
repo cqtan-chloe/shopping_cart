@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>> hq_pkgs</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <a class="navbar-brand" asp-controller="Gallery" asp-action="Index">> hq_pkgs</a>
+            <div class="navbar-collapse">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Product" asp-action="Index">Products</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="PurchaseHistory" asp-action="Index">My Purchases</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-dark emphasize">Hi, @ViewData["Username"]</a>
+                    </li>
+
+                    <li style="float:right">
+                        <a href="/Cart/Cart"><img src="~/img/cart.png" style="height:25px"></a>
+                        <span id="cartNumber" class="badge" size="1"></span>
+                    </li>
+
+                    @if (ViewData["sessionId"] == null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Login" asp-action="Login">Login</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Logout" asp-action="Index">Logout</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        @RenderSection("Scripts", required: false)
+</body>
+</html>

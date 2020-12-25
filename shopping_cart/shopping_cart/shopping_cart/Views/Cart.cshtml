@@ -1,0 +1,57 @@
+﻿@using GDipSA51_Team5.Models
+
+@{
+    List<CartItem> cart = (List<CartItem>)ViewData["cart"];
+}
+
+@section Scripts
+{
+    <script src="~/js/Cart.js"></script>
+}
+
+
+<table id="mainframe">
+    @for (int i = 0; i < cart.Count(); i++)
+    {
+        double itemTotal = cart[i].Quantity * cart[i].Product.Price;
+
+        <tr>
+            <td class="listing" style="padding-bottom: 1%;">
+                <img src=@cart[i].Product.Url class="image" />
+                <div id="pdt-name">@cart[i].Product.Name</div>
+                <div id="pdt-descr">@cart[i].Product.Description</div>
+            </td>
+
+            <td class="td-filler">
+                <table>
+                    <tr>
+                        <td>Price:</td>
+                        <td>$<span class="price">@cart[i].Product.Price</span></td>
+                    </tr>
+                    <tr>
+                        <td>Quantity:</td>
+                        <td><input class="quantity" min="1" name="@cart[i].ProductId-quantity" value="@cart[i].Quantity" type="number" productid="@cart[i].ProductId"></td>
+                    </tr>
+                    <tr>
+                        <td>Total:</td>
+                        <td>$<span class="tbox-invisible product_total">@itemTotal</span></td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">
+                            <button class="remove_icon" product_id="@cart[i].ProductId"><img src="~/img/delete.png" width="30" height="30" /></button>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+
+            <td class="td-filler"></td>
+        </tr>
+    }
+</table>
+<br />
+<form action="/Cart/Checkout" method="post">
+    <input type="submit" class="button" style="float:right" value="CheckOut">
+</form>
+<br />
+
+<script src="~/js/Cart.js"></script>

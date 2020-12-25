@@ -1,0 +1,26 @@
+﻿<style>
+    td{
+        padding: 5px;
+    }
+</style>
+
+<form id="form" action="/Login/Authenticate" method="post">
+    <table align="center">
+        <tr>
+            <td>Username:</td>
+            <td><input name="username" class="form-control-from" id="username" value=@ViewData["username"] /></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td><input name="password" class="form-control-from" id="password" type="password" /></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="right"><input type="submit" id="submitBtn" class="button" value="Login"></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <div class="err_msg">@ViewData["errmsg"]</div>
+            </td>
+        </tr>
+    </table>
+</form>
