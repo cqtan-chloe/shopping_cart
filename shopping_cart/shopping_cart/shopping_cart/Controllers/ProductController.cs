@@ -12,7 +12,7 @@ namespace GDipSA51_Team5.Controllers
 
         public ProductController(Team5_Db db)
         {
-            this.db = db;
+            this.db = db; // dfsdfd
         }
 
         public IActionResult ListProducts(string searchString)
