@@ -12,21 +12,20 @@ namespace GDipSA51_Team5.Controllers
     public class CartController : Controller
     {
         private readonly Team5_Db db;
-        private readonly Session session;
-        private readonly string sessionId;
-        private readonly string userId;
 
         public CartController(Team5_Db db)
         {
             this.db = db;
-            sessionId = HttpContext.Request.Cookies["sessionId"];
-            session = db.Sessions.FirstOrDefault(x => x.Id == sessionId);
-            if (session == null) { userId = session.UserId.ToString(); } else { userId = Environment.MachineName; }
         }
 
         //receive JSON data from Add.js. (When an item is added to the cart from gallery)
         public JsonResult AddItemToCart([FromBody] Addinput product)
         {
+            string sessionId = HttpContext.Request.Cookies["sessionId"];
+            Session session = db.Sessions.FirstOrDefault(x => x.Id == sessionId);
+            string userId;
+            if (session == null) { userId = session.UserId.ToString(); } else { userId = Environment.MachineName; }
+
             CartItem item = db.Cart.FirstOrDefault(x => x.UserId == userId && x.ProductId == product.ProductId);
 
             if (item == null)
@@ -48,18 +47,27 @@ namespace GDipSA51_Team5.Controllers
             });
         }
 
-        [Route("Cart")]
         public IActionResult ListCartItems()//HttpGET on the cart() action
         {
+            string sessionId = HttpContext.Request.Cookies["sessionId"];
+            Session session = db.Sessions.FirstOrDefault(x => x.Id == sessionId);
+            string userId;
+            if (sessionId == null) { userId = session.UserId.ToString(); } else { userId = Environment.MachineName; }
+
             List<CartItem> cart = db.Cart.Where(x => x.UserId == userId).ToList();
 
             ViewData["cart"] = cart;
-            return View();
+            return View("Cart");
         }
 
         [HttpPost]
         public string ChangeCartItemQuantity([FromBody] ChangeInput change)//receive JSON object from Cart.js when the number in the cart is changed
         {
+            string sessionId = HttpContext.Request.Cookies["sessionId"];
+            Session session = db.Sessions.FirstOrDefault(x => x.Id == sessionId);
+            string userId;
+            if (session == null) { userId = session.UserId.ToString(); } else { userId = Environment.MachineName; }
+
             CartItem item = db.Cart.FirstOrDefault(x => x.UserId == userId && x.ProductId == change.ProductId);
 
             item.Quantity = int.Parse(change.Value);
@@ -78,6 +86,11 @@ namespace GDipSA51_Team5.Controllers
         [HttpPost]
         public JsonResult DeleteCartItem([FromBody] Addinput product)
         {
+            string sessionId = HttpContext.Request.Cookies["sessionId"];
+            Session session = db.Sessions.FirstOrDefault(x => x.Id == sessionId);
+            string userId;
+            if (session == null) { userId = session.UserId.ToString(); } else { userId = Environment.MachineName; }
+
             CartItem item = db.Cart.FirstOrDefault(x => x.UserId == userId && x.ProductId == product.ProductId);
 
             db.Cart.Remove(item);
@@ -92,6 +105,11 @@ namespace GDipSA51_Team5.Controllers
         [HttpPost] 
         public IActionResult Checkout() // checkout is form deletion from Cart and adding to PurchaseHistory
         {
+            string sessionId = HttpContext.Request.Cookies["sessionId"];
+            Session session = db.Sessions.FirstOrDefault(x => x.Id == sessionId);
+            string userId;
+            if (session == null) { userId = session.UserId.ToString(); } else { userId = Environment.MachineName; }
+
             if (session == null) return RedirectToAction("Login", "Login");
 
             List<CartItem> cart = db.Cart.Where(x => x.UserId == userId).ToList();

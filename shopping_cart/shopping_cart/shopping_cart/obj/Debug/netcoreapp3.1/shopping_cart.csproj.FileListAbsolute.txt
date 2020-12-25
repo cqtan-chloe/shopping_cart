@@ -148,7 +148,7 @@ C:\Users\DaJie\Desktop\shopping_cart\shopping_cart\shopping_cart\shopping_cart\o
 C:\Users\DaJie\Desktop\shopping_cart\shopping_cart\shopping_cart\shopping_cart\obj\Debug\netcoreapp3.1\shopping_cart.dll
 C:\Users\DaJie\Desktop\shopping_cart\shopping_cart\shopping_cart\shopping_cart\obj\Debug\netcoreapp3.1\shopping_cart.pdb
 C:\Users\DaJie\Desktop\shopping_cart\shopping_cart\shopping_cart\shopping_cart\obj\Debug\netcoreapp3.1\shopping_cart.genruntimeconfig.cache
-C:\Users\DaJie\Desktop\shopping_cart\shopping_cart\shopping_cart\shopping_cart\obj\Debug\netcoreapp3.1\Razor\Views\Cart.cshtml.g.cs
-C:\Users\DaJie\Desktop\shopping_cart\shopping_cart\shopping_cart\shopping_cart\obj\Debug\netcoreapp3.1\Razor\Views\Gallery.cshtml.g.cs
-C:\Users\DaJie\Desktop\shopping_cart\shopping_cart\shopping_cart\shopping_cart\obj\Debug\netcoreapp3.1\Razor\Views\Login.cshtml.g.cs
-C:\Users\DaJie\Desktop\shopping_cart\shopping_cart\shopping_cart\shopping_cart\obj\Debug\netcoreapp3.1\Razor\Views\PurchaseHistory.cshtml.g.cs
+C:\Users\DaJie\Desktop\shopping_cart\shopping_cart\shopping_cart\shopping_cart\obj\Debug\netcoreapp3.1\Razor\Views\Cart\Cart.cshtml.g.cs
+C:\Users\DaJie\Desktop\shopping_cart\shopping_cart\shopping_cart\shopping_cart\obj\Debug\netcoreapp3.1\Razor\Views\Login\Login.cshtml.g.cs
+C:\Users\DaJie\Desktop\shopping_cart\shopping_cart\shopping_cart\shopping_cart\obj\Debug\netcoreapp3.1\Razor\Views\Product\Gallery.cshtml.g.cs
+C:\Users\DaJie\Desktop\shopping_cart\shopping_cart\shopping_cart\shopping_cart\obj\Debug\netcoreapp3.1\Razor\Views\PurchaseHistory\PurchaseHistory.cshtml.g.cs

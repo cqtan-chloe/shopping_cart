@@ -15,35 +15,39 @@
             <div class="navbar-collapse">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="Product" asp-action="Index">Products</a>
+                        <a class="nav-link text-dark" asp-controller="Product" asp-action="ListProducts">Products</a>
                     </li>
+                </ul>
 
+                <ul class="navbar-nav flex-grow-1" style="float:right">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="PurchaseHistory" asp-action="Index">My Purchases</a>
+                        <a class="nav-link text-dark" asp-controller="PurchaseHistory" asp-action="ListPurchaseHistory">My Purchases</a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link text-dark emphasize">Hi, @ViewData["Username"]</a>
                     </li>
 
-                    <li style="float:right">
-                        <a href="/Cart/Cart"><img src="~/img/cart.png" style="height:25px"></a>
-                        <span id="cartNumber" class="badge" size="1"></span>
-                    </li>
-
                     @if (ViewData["sessionId"] == null)
                     {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Login" asp-action="Login">Login</a>
+                            <a class="nav-link text-dark" asp-controller="Session" asp-action="Login">Login</a>
                         </li>
                     }
                     else
                     {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Logout" asp-action="Index">Logout</a>
+                            <a class="nav-link text-dark" asp-controller="Session" asp-action="Logout">Logout</a>
                         </li>
                     }
+
+
                 </ul>
+
+                <span style="float:right">
+                    <a href="/Cart/ListCartItems"><img src="~/img/cart.png" style="height:25px"></a>
+                    <span id="cartNumber" class="badge" size="1"></span>
+                </span>
             </div>
         </nav>
     </header>
