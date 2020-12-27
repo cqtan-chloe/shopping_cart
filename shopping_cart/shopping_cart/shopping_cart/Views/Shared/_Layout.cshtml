@@ -15,16 +15,6 @@
             <div class="navbar-collapse">
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="Product" asp-action="ListProducts">Products</a>
-                    </li>
-                </ul>
-
-                <ul class="navbar-nav flex-grow-1" style="float:right">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-controller="PurchaseHistory" asp-action="ListPurchaseHistory">My Purchases</a>
-                    </li>
-
-                    <li class="nav-item">
                         <a class="nav-link text-dark emphasize">Hi, @ViewData["Username"]</a>
                     </li>
 
@@ -41,7 +31,13 @@
                         </li>
                     }
 
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Product" asp-action="ListProducts">Products</a>
+                    </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="PurchaseHistory" asp-action="ListPurchaseHistory">My Purchases</a>
+                    </li>
                 </ul>
 
                 <span style="float:right">

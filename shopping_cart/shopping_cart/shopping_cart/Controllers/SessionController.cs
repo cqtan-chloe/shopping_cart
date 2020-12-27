@@ -43,15 +43,15 @@ namespace GDipSA51_Team5.Controllers
 
 
             // the sequence of steps below matters. 
-            string userId = Environment.MachineName;
-            AddNewItemsToCart(userId, session.UserId.ToString());
+            AddNewItemsToCart(Environment.MachineName, session.UserId.ToString());
             Response.Cookies.Append("sessionId", session.Id);
             Response.Cookies.Append("userId", session.UserId.ToString());
+            Response.Cookies.Append("Username", db.Users.FirstOrDefault(x => x.UserId == session.UserId).Username);
 
             return RedirectToAction("ListProducts", "Product");
         }
 
-        private void AddNewItemsToCart(string userId, string session_UserId)  // session_UserId should be the real user ID converted to from int to string
+        private void AddNewItemsToCart(string userId, string session_UserId)  // session_UserId should be the real user ID converteid to from int to string
         {
             List<CartItem> cart = db.Cart.Where(x => x.UserId == userId).ToList();  // userId should be the DeviceName
 

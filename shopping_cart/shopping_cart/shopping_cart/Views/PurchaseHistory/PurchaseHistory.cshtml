@@ -19,18 +19,19 @@
                 <input type="button" name="button" class="button" value="Download" />
             </td>
 
-            <td class="td-filler">
+            <td style="width: 60%;">
+
                 <table>
                     <tr>
-                        <td>Purchased On:</td>
-                        <td>listing[0].PurchaseDate.ToLongDateString()</td>
+                        <td>Purchased On:&nbsp;</td>
+                        <td>@listing[0].PurchaseDate.ToLongDateString()</td>
                     </tr>
                     <tr>
-                        <td>Quantity:</td>
-                        <td>listing.Count()</td>
+                        <td>Quantity:&nbsp;</td>
+                        <td>@listing.Count()</td>
                     </tr>
                     <tr>
-                        <td>Activation Code:</td>
+                        <td>Activation Code:&nbsp;</td>
                         <td>
                             <form>
                                 <select id="select">

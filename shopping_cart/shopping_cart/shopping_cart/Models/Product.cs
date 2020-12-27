@@ -1,16 +1,9 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace GDipSA51_Team5.Models
 {
     public class Product
     {
-
-        public Product()
-        {
-            PurchaseHistory = new HashSet<Purchase>();
-        }
-
         [Required]
         public int ProductId { get; set; }
 
@@ -29,8 +22,5 @@ namespace GDipSA51_Team5.Models
         public string Url { get; set; }
 
         public string GalleryTypeId { get; set; }
-
-        public virtual ICollection<Purchase> PurchaseHistory { get; set; }
-
     }
 }

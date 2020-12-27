@@ -5,12 +5,6 @@ namespace GDipSA51_Team5.Models
 {
     public class User
     {
-
-        public User()
-        {
-            PurchaseHistory = new HashSet<Purchase>();
-        }
-
         [Required]
         public int UserId { get; set; }
 
@@ -21,7 +15,5 @@ namespace GDipSA51_Team5.Models
         [Required]
         [MaxLength(15)]
         public string Password { get; set; }
-
-        public virtual ICollection<Purchase> PurchaseHistory { get; set; }
     }
 }

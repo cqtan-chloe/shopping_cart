@@ -1,7 +1,5 @@
-﻿using GDipSA51_Team5.Data;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using GDipSA51_Team5.Models;
 
 namespace GDipSA51_Team5.Models
 {
@@ -25,9 +23,6 @@ namespace GDipSA51_Team5.Models
 
         [Required]
         public int ListingId { get; set; }
-
-        public virtual Product Product { get; set; }
-        public virtual User User { get; set; }
     }
 
 }

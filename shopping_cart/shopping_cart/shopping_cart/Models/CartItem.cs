@@ -4,11 +4,6 @@ namespace GDipSA51_Team5.Models
 {
     public class CartItem
     {
-        /*public CartItem()
-        {
-            this.product = new Product();
-        }*/
-
         public int Id { get; set; }
 
         [Required]
@@ -18,7 +13,6 @@ namespace GDipSA51_Team5.Models
         public string pId { get; set; }
 
         public int Quantity { get; set; }
-        
 
         public virtual Product product { get; set; }
 
@@ -28,17 +22,6 @@ namespace GDipSA51_Team5.Models
     {
         public string ProductId { get; set; }
     }
-
-    /*
-    public class CartItems
-    {
-        public Dictionary<string, CartItem> map { get; set; }
-
-        public CartItems()
-        {
-            map = new Dictionary<string, CartItem>();
-        }
-    }*/
 
     public class ChangeInput
     {
