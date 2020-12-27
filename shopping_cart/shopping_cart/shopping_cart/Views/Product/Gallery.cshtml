@@ -8,7 +8,7 @@
 }
 
 <div>
-    @using (Html.BeginForm("Index", "Gallery", FormMethod.Get))
+    @using (Html.BeginForm("ListProducts", "Product", FormMethod.Get))
     {
         <input type="text" class="form-control-from" name="searchString" style="width: 20%; display:inline; margin-left: calc(2% + 1%)">
         <input type="submit" class="button" style="display:inline;" value="Search">

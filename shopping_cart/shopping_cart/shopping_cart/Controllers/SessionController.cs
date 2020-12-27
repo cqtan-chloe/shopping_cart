@@ -21,6 +21,7 @@ namespace GDipSA51_Team5.Controllers
             return View("Login");
         }
 
+        [HttpPost]
         public IActionResult Authenticate(string username, string password)
         {
             User user = db.Users.FirstOrDefault(x => x.Username == username && x.Password == password);
@@ -47,7 +48,7 @@ namespace GDipSA51_Team5.Controllers
             Response.Cookies.Append("sessionId", session.Id);
             Response.Cookies.Append("userId", session.UserId.ToString());
 
-            return RedirectToAction("Product", "ListProducts");
+            return RedirectToAction("ListProducts", "Product");
         }
 
         private void AddNewItemsToCart(string userId, string session_UserId)  // session_UserId should be the real user ID converted to from int to string
@@ -57,6 +58,7 @@ namespace GDipSA51_Team5.Controllers
             foreach (CartItem item in cart)
             {
                 item.UserId = session_UserId;
+                db.Update(item);
                 db.SaveChanges();
             }
         }

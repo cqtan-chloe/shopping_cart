@@ -15,8 +15,8 @@ namespace GDipSA51_Team5.Controllers
         public ProductController(Team5_Db db)
         {
             this.db = db;
-            try { userId = HttpContext.Request.Cookies["userId"]; } catch (NullReferenceException) { userId = Environment.MachineName; }
             try { sessionId = HttpContext.Request.Cookies["sessionId"]; } catch (NullReferenceException) { sessionId = null; }
+            if (sessionId != null) { userId = HttpContext.Request.Cookies["userId"]; } else { userId = Environment.MachineName; }
         }
 
         public IActionResult ListProducts(string searchString)

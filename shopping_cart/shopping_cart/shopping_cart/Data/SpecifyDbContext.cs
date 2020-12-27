@@ -22,9 +22,13 @@ namespace GDipSA51_Team5.Data
 
             modelBuilder.Entity<Product>()
                 .HasKey(c => c.ProductId);
-
+            /*
             modelBuilder.Entity<CartItem>()
-                .HasAlternateKey(e => new { e.UserId, e.ProductId });
+                .HasAlternateKey(e => new { e.UserId, e.ProductId });*/
+
+            
+            modelBuilder.Entity<CartItem>()
+                .HasKey(c => c.Id);
 
             modelBuilder.Entity<Purchase>(entity =>
             {

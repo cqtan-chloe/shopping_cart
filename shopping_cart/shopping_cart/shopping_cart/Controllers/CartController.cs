@@ -8,6 +8,7 @@ using System.Text.Json;
 using System;
 using Castle.Core.Internal;
 using Microsoft.Extensions.Configuration.UserSecrets;
+using System.Diagnostics;
 
 namespace GDipSA51_Team5.Controllers
 {
@@ -20,44 +21,43 @@ namespace GDipSA51_Team5.Controllers
         public CartController(Team5_Db db)
         {
             this.db = db;
-            try { userId = HttpContext.Request.Cookies["userId"]; } catch (NullReferenceException) { userId = Environment.MachineName; }
             try { sessionId = HttpContext.Request.Cookies["sessionId"]; } catch (NullReferenceException) { sessionId = null; }
+            if (sessionId != null) { userId = HttpContext.Request.Cookies["userId"]; } else { userId = Environment.MachineName; }
         }
 
         //receive JSON data from Add.js. (When an item is added to the cart from gallery)
-        public JsonResult AddItemToCart([FromBody] Addinput product)
+        public void AddItemToCart([FromBody] Addinput product)
         {
             CartItem item = db.Cart.FirstOrDefault(x => x.UserId == userId && x.ProductId == product.ProductId);
 
             if (item == null)
             {
+                item = new CartItem();
+
                 item.UserId = userId;
                 item.ProductId = product.ProductId;
+                item.Quantity = 1;
+                db.Add(item);
+            }
+            else
+            {
+                item.Quantity += 1;
+                db.Update(item);
             }
 
-            item.Quantity += 1;
-
-            db.Add(item);
             db.SaveChanges();
-
-            //return the total as JSON to the Add.js
-            return Json(new
-            {
-                status = "success",
-                total = item.Quantity
-            });
         }
 
         public IActionResult ListCartItems()//HttpGET on the cart() action
         {
             List<CartItem> cart = db.Cart.Where(x => x.UserId == userId).ToList();
-
+           
             ViewData["cart"] = cart;
             return View("Cart");
         }
 
         [HttpPost]
-        public string ChangeCartItemQuantity([FromBody] ChangeInput change)//receive JSON object from Cart.js when the number in the cart is changed
+        public void ChangeCartItemQuantity([FromBody] ChangeInput change)//receive JSON object from Cart.js when the number in the cart is changed
         {
             CartItem item = db.Cart.FirstOrDefault(x => x.UserId == userId && x.ProductId == change.ProductId);
 
@@ -65,27 +65,15 @@ namespace GDipSA51_Team5.Controllers
 
             db.Cart.Update(item);
             db.SaveChanges();
-
-            object data = new
-            {
-                status = "success"
-            };
-
-            return JsonSerializer.Serialize(data);
         }
 
         [HttpPost]
-        public JsonResult DeleteCartItem([FromBody] Addinput product)
+        public void DeleteCartItem([FromBody] Addinput product)
         {
             CartItem item = db.Cart.FirstOrDefault(x => x.UserId == userId && x.ProductId == product.ProductId);
 
             db.Cart.Remove(item);
             db.SaveChanges();
-
-            return Json(new
-            {
-                status = "success"
-            });
         }
 
         [HttpPost] 

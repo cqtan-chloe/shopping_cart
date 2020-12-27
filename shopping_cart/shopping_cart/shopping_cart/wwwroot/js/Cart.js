@@ -51,23 +51,8 @@ function UpdateTotal(elem) {
 function sendChange(productId, value) {
     let xhr = new XMLHttpRequest();
 
-    xhr.open("POST", "/Cart/Cart");
+    xhr.open("POST", "/Cart/ChangeCartItemQuantity");
     xhr.setRequestHeader("Content-Type", "application/json; charset=utf8");
-    xhr.onreadystatechange = function () {
-        if (this.readyState === XMLHttpRequest.DONE) {
-            // receive response from server
-            if (this.status === 200 || this.status === 302) {
-                let data = JSON.parse(this.responseText);
-
-                if (this.status === 200) {
-                    console.log("Successful operation: " + data.success);
-                }
-                else if (this.status === 302) {
-                    window.location = data.redirect_url;
-                }
-            }
-        }
-    };
 
     xhr.send(JSON.stringify({
         ProductId: productId,
@@ -90,19 +75,9 @@ function SendProductId(productId, elem) {
     let xhr = new XMLHttpRequest();
 
     //send to action method to receive AJAX call
-    xhr.open("POST", "/Cart/RemoveItem");
+    xhr.open("POST", "/Cart/DeleteCartItem");
     xhr.setRequestHeader("Content-Type", "application/json; charset=utf8");
-    xhr.onreadystatechange = function () {
-        if (this.readyState === XMLHttpRequest.DONE) {
-            if (this.status == 200) {
-                let data = JSON.parse(this.responseText);
-                console.log("Successful operation: " + data.success);
-                elem.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.remove();
-                UpdateTotal(elem);
-            }
-        }
-    };
-    //send product id to controller as identifier
+
     xhr.send(JSON.stringify({
         ProductId: productId,
     }));
