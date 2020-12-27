@@ -4,18 +4,23 @@ namespace GDipSA51_Team5.Models
 {
     public class CartItem
     {
+        /*public CartItem()
+        {
+            this.product = new Product();
+        }*/
+
         public int Id { get; set; }
 
         [Required]
         public string UserId { get; set; }     // if user is not logged in, UserId is set to device name
 
         [Required]
-        public string ProductId { get; set; }
+        public string pId { get; set; }
 
         public int Quantity { get; set; }
         
 
-        public virtual Product Product { get; set; }
+        public virtual Product product { get; set; }
 
     }
 

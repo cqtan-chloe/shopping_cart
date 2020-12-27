@@ -28,15 +28,16 @@ namespace GDipSA51_Team5.Controllers
         //receive JSON data from Add.js. (When an item is added to the cart from gallery)
         public void AddItemToCart([FromBody] Addinput product)
         {
-            CartItem item = db.Cart.FirstOrDefault(x => x.UserId == userId && x.ProductId == product.ProductId);
+            CartItem item = db.Cart.FirstOrDefault(x => x.UserId == userId && x.pId == product.ProductId);
 
             if (item == null)
             {
                 item = new CartItem();
 
                 item.UserId = userId;
-                item.ProductId = product.ProductId;
+                item.pId = product.ProductId;
                 item.Quantity = 1;
+                item.product = db.Products.FirstOrDefault(x => x.ProductId == int.Parse(product.ProductId));
                 db.Add(item);
             }
             else
@@ -59,7 +60,7 @@ namespace GDipSA51_Team5.Controllers
         [HttpPost]
         public void ChangeCartItemQuantity([FromBody] ChangeInput change)//receive JSON object from Cart.js when the number in the cart is changed
         {
-            CartItem item = db.Cart.FirstOrDefault(x => x.UserId == userId && x.ProductId == change.ProductId);
+            CartItem item = db.Cart.FirstOrDefault(x => x.UserId == userId && x.pId == change.ProductId);
 
             item.Quantity = int.Parse(change.Value);
 
@@ -70,7 +71,7 @@ namespace GDipSA51_Team5.Controllers
         [HttpPost]
         public void DeleteCartItem([FromBody] Addinput product)
         {
-            CartItem item = db.Cart.FirstOrDefault(x => x.UserId == userId && x.ProductId == product.ProductId);
+            CartItem item = db.Cart.FirstOrDefault(x => x.UserId == userId && x.pId == product.ProductId);
 
             db.Cart.Remove(item);
             db.SaveChanges();
@@ -91,9 +92,9 @@ namespace GDipSA51_Team5.Controllers
                     {
                         ActivationCode = Guid.NewGuid().ToString().Substring(3, 15),
                         UserId = int.Parse(item.UserId),
-                        ProductId = int.Parse(item.ProductId),
+                        ProductId = int.Parse(item.pId),
                         PurchaseDate = DateTime.Today.Date,
-                        ListingId = (item.ProductId + DateTime.Today.Date).GetHashCode()
+                        ListingId = (item.pId + DateTime.Today.Date).GetHashCode()
                     };
 
                     db.PurchaseHistory.Add(order);

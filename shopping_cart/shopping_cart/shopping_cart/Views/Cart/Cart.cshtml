@@ -9,26 +9,30 @@
 
 
 <table id="mainframe">
-    @for (int i = 0; i < cart.Count(); i++)
+    @for (int i = 0; i < cart.Count; i++)
     {
-        double itemTotal = cart[i].Quantity * cart[i].Product.Price;
+        int tmp1 = cart[i].Quantity;
+        double tmp2 = cart[i].product.ProductId;
+        double tmp3 = cart[i].product.Price;
+        string tmp4 = cart[i].product.Url;
+        double itemTotal = cart[i].Quantity * cart[i].product.Price;
 
         <tr>
             <td class="listing" style="padding-bottom: 1%;">
-                <img src=@cart[i].Product.Url class="image" />
-                <div id="pdt-name">@cart[i].Product.Name</div>
-                <div id="pdt-descr">@cart[i].Product.Description</div>
+                <img src=@cart[i].product.Url class="image" />
+                <div id="pdt-name">@cart[i].product.Name</div>
+                <div id="pdt-descr">@cart[i].product.Description</div>
             </td>
 
             <td class="td-filler">
                 <table>
                     <tr>
                         <td>Price:</td>
-                        <td>$<span class="price">@cart[i].Product.Price</span></td>
+                        <td>$<span class="price">@cart[i].product.Price</span></td>
                     </tr>
                     <tr>
                         <td>Quantity:</td>
-                        <td><input class="quantity" min="1" name="@cart[i].ProductId-quantity" value="@cart[i].Quantity" type="number" productid="@cart[i].ProductId"></td>
+                        <td><input class="quantity" min="1" name="@cart[i].pId-quantity" value="@cart[i].Quantity" type="number" productid="@cart[i].pId"></td>
                     </tr>
                     <tr>
                         <td>Total:</td>
@@ -36,7 +40,7 @@
                     </tr>
                     <tr>
                         <td rowspan="2">
-                            <button class="remove_icon" product_id="@cart[i].ProductId"><img src="~/img/delete.png" width="30" height="30" /></button>
+                            <button class="remove_icon" product_id="@cart[i].pId"><img src="~/img/delete.png" width="30" height="30" /></button>
                         </td>
                     </tr>
                 </table>

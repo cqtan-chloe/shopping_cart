@@ -15,6 +15,7 @@ namespace GDipSA51_Team5.Data
             // MS SQL, Oracle, SQL Lite, MySQL
         }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
