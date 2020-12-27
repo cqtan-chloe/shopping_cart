@@ -62,15 +62,14 @@ function sendChange(productId, value) {
 
 function confirmRemove(event) {
     if (confirm("Confirm remove item from the cart?")) {
-        //get product id for removed item
         let elem = event.currentTarget;
         let productId = elem.getAttribute("product_id");
 
-        SendProductId(productId, elem)
+        SendProductId(productId)
     }
 }
 
-function SendProductId(productId, elem) {
+function SendProductId(productId) {
     //send AJAX request to server to remove record from database
     let xhr = new XMLHttpRequest();
 

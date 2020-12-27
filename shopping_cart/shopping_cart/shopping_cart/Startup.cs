@@ -45,12 +45,12 @@ namespace GDipSA51_Team5
                     name: "default",
                     pattern: "{controller=Product}/{action=ListProducts}/{id?}");
             });
-          
+          /*
             db.Database.EnsureDeleted();
             db.Database.EnsureCreated();
 
             SeedData seed = new SeedData(db);
-            seed.Init(); 
+            seed.Init(); */
         }
     }
 }
