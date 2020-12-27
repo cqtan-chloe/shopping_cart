@@ -45,6 +45,7 @@ namespace GDipSA51_Team5.Controllers
             string userId = Environment.MachineName;
             AddNewItemsToCart(userId, session.UserId.ToString());
             Response.Cookies.Append("sessionId", session.Id);
+            Response.Cookies.Append("userId", session.UserId.ToString());
 
             return RedirectToAction("Product", "ListProducts");
         }

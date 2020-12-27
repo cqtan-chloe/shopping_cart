@@ -9,13 +9,13 @@
 function onAdd(event) {
     let elem = event.currentTarget;
     let productId = elem.getAttribute("photo_id");
-    sendAdd(true, productId)
+    sendAdd(productId)
 }
 
-function sendAdd(addIt, productId) {
+function sendAdd(productId) {
     let xhr = new XMLHttpRequest();
 
-    xhr.open("POST", "/Add/Addin");
+    xhr.open("POST", "/Cart/AddItemToCart");
     xhr.setRequestHeader("Content-Type", "application/json; charset=utf8");
     xhr.onreadystatechange = function () {
 
@@ -30,7 +30,6 @@ function sendAdd(addIt, productId) {
 
     // send add choice to server
     xhr.send(JSON.stringify({
-        AddIt: addIt,
         ProductId: productId
     }));
 }

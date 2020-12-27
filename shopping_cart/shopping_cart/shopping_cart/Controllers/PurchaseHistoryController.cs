@@ -10,22 +10,24 @@ namespace GDipSA51_Team5.Controllers
     public class PurchaseHistoryController : Controller
     {
         private readonly Team5_Db db;
+        private readonly string userId;
+        private readonly string sessionId;
 
         public PurchaseHistoryController(Team5_Db db)
         {
             this.db = db;
+            try { userId = HttpContext.Request.Cookies["userId"]; } catch (NullReferenceException) { userId = Environment.MachineName; }
+            try { sessionId = HttpContext.Request.Cookies["sessionId"]; } catch (NullReferenceException) { sessionId = null; }
         }
 
         public IActionResult ListPurchaseHistory()
         {
-            string sessionId = HttpContext.Request.Cookies["sessionId"];
             if (sessionId == null) return RedirectToAction("Login", "Login");
 
-            Session session = db.Sessions.FirstOrDefault(x => x.Id == sessionId);
-            List<Purchase> pastPurchases = db.PurchaseHistory.Where(x => x.UserId == session.UserId).ToList();
+            List<Purchase> pastPurchases = db.PurchaseHistory.Where(x => x.UserId == int.Parse(userId)).ToList();
 
             ViewData["pastPurchases"] = pastPurchases;
-            ViewData["sessionId"] = Request.Cookies["sessionId"];
+            ViewData["sessionId"] = sessionId;
 
             return View("PurchaseHistory");
         }
