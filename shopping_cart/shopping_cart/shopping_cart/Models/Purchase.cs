@@ -23,6 +23,9 @@ namespace GDipSA51_Team5.Models
 
         [Required]
         public int ListingId { get; set; }
+
+        public virtual Product Product { get; set; }
+        public virtual User User { get; set; }
     }
 
 }

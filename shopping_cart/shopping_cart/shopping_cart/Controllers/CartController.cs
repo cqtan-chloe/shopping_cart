@@ -65,7 +65,7 @@ namespace GDipSA51_Team5.Controllers
            
             ViewData["cart"] = cart;
             ViewData["sessioinId"] = sessionId;
-            ViewData["Username"] = HttpContext.Request.Cookies["Username"] == null ? "Guest" : HttpContext.Request.Cookies["Username"];
+            ViewData["Username"] = HttpContext.Request.Cookies["Username"] ?? "Guest";
             return View("Cart");
         }
 
@@ -84,7 +84,7 @@ namespace GDipSA51_Team5.Controllers
         }
 
         [HttpPost]
-        public void DeleteCartItem([FromBody] Addinput product)
+        public JsonResult DeleteCartItem([FromBody] Addinput product)
         {
             string sessionId; try { sessionId = HttpContext.Request.Cookies["sessionId"]; } catch (NullReferenceException) { sessionId = null; }
             string userId; if (sessionId != null) { userId = HttpContext.Request.Cookies["userId"]; } else { userId = Environment.MachineName; }
@@ -93,6 +93,11 @@ namespace GDipSA51_Team5.Controllers
 
             db.Cart.Remove(item);
             db.SaveChanges();
+
+            return Json(new
+            {
+                status = "success"
+            });
         }
 
         [HttpPost] 

@@ -65,17 +65,28 @@ function confirmRemove(event) {
         let elem = event.currentTarget;
         let productId = elem.getAttribute("product_id");
 
-        SendProductId(productId)
+        SendProductId(productId, elem)
     }
 }
 
-function SendProductId(productId) {
+function SendProductId(productId, elem) {
     //send AJAX request to server to remove record from database
     let xhr = new XMLHttpRequest();
 
     //send to action method to receive AJAX call
     xhr.open("POST", "/Cart/DeleteCartItem");
     xhr.setRequestHeader("Content-Type", "application/json; charset=utf8");
+
+    xhr.onreadystatechange = function () {
+        if (this.readyState === XMLHttpRequest.DONE) {
+            if (this.status == 200) {
+                let data = JSON.parse(this.responseText);
+                console.log("Successful operation: " + data.success);
+                elem.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.remove();
+                UpdateTotal(elem);
+            }
+        }
+    };
 
     xhr.send(JSON.stringify({
         ProductId: productId,
