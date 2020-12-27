@@ -18,6 +18,7 @@ namespace GDipSA51_Team5.Controllers
 
         public IActionResult Login()
         {
+            ViewData["Username"] = HttpContext.Request.Cookies["Username"] == null ? "Guest" : HttpContext.Request.Cookies["Username"];
             return View("Login");
         }
 
@@ -71,8 +72,10 @@ namespace GDipSA51_Team5.Controllers
 
             db.Sessions.Remove(session);
             HttpContext.Response.Cookies.Delete("sessionId");
+            HttpContext.Response.Cookies.Delete("userId");
+            HttpContext.Response.Cookies.Delete("Username");
 
-            return RedirectToAction("Product", "Gallery");
+            return RedirectToAction("ListProducts", "Product");
         }
 
     }

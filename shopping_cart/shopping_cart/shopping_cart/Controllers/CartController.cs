@@ -64,8 +64,8 @@ namespace GDipSA51_Team5.Controllers
             List<CartItem> cart = db.Cart.Where(x => x.UserId == userId).ToList();
            
             ViewData["cart"] = cart;
-            ViewData["sessioinId"] = sessionId;
-            ViewData["Username"] = HttpContext.Request.Cookies["Username"] ?? "Guest";
+            ViewData["sessionId"] = sessionId;
+            ViewData["Username"] = HttpContext.Request.Cookies["Username"] == null ? "Guest" : HttpContext.Request.Cookies["Username"];
             return View("Cart");
         }
 
