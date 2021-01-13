@@ -1,7 +1,7 @@
 # Shopping Cart
 
 ## About 
-A project done with 6 team members in a module of the graduate diploma I'm doing. 
+The refactored version of a project done with 6 team members in a module of the graduate diploma I'm doing. 
 
 ## List of technical skills showcased
 - C#
